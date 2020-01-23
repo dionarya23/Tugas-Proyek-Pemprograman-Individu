@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan Peminjaman" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="85b41646-bca1-4135-a55e-faebdc51d501">
+	<property name="ireport.zoom" value="1.7715610000000022"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="TglAwal" class="java.lang.String"/>
+	<parameter name="TglAkhir" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     pinjam.`NoPinjam` AS pinjam_NoPinjam,
+     pinjam.`TglPinjam` AS pinjam_TglPinjam,
+     pinjam.`NoAnggota` AS pinjam_NoAnggota,
+     anggota.`Nama` AS anggota_Nama,
+     buku.`Judul` AS buku_Judul,
+     detailpinjam.`Status` AS detailpinjam_Status,
+     detailpinjam.`KodeBuku` AS detailpinjam_KodeBuku
+FROM
+     `pinjam` pinjam INNER JOIN `detailpinjam` detailpinjam ON pinjam.`NoPinjam` = detailpinjam.`NoPinjam`
+    INNER JOIN `anggota` anggota ON pinjam.`NoAnggota` = anggota.`NoAnggota`
+     INNER JOIN `buku` buku ON detailpinjam.`KodeBuku` = buku.`KodeBuku`]]>
+	</queryString>
+	<field name="pinjam_NoPinjam" class="java.lang.String"/>
+	<field name="pinjam_TglPinjam" class="java.sql.Date"/>
+	<field name="pinjam_NoAnggota" class="java.lang.String"/>
+	<field name="anggota_Nama" class="java.lang.String"/>
+	<field name="buku_Judul" class="java.lang.String"/>
+	<field name="detailpinjam_Status" class="java.lang.String"/>
+	<field name="detailpinjam_KodeBuku" class="java.lang.String"/>
+	<group name="pinjam_NoPinjam">
+		<groupExpression><![CDATA[$F{pinjam_NoPinjam}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<staticText>
+					<reportElement x="16" y="5" width="100" height="20" uuid="997ad8ff-e297-4290-a142-e10f162746c5"/>
+					<textElement>
+						<font fontName="Calibri" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[No Pinjam]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="16" y="25" width="100" height="20" uuid="5b2cc87d-bcb9-43d7-80c7-25bc18ff215c"/>
+					<textElement>
+						<font fontName="Calibri" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tgl Pinjam]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="129" y="5" width="145" height="20" uuid="97d1f402-c52e-4f80-b0f6-3a555f6c397d"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pinjam_NoPinjam}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="129" y="25" width="145" height="20" uuid="d1682e16-119a-467a-a40d-5b866271744b"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pinjam_TglPinjam}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="291" y="5" width="100" height="20" uuid="5d46d25a-808e-454d-9417-f84365fc766d"/>
+					<textElement>
+						<font fontName="Calibri" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[No Anggota]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="291" y="25" width="100" height="20" uuid="16fcb263-8a29-4ece-b0b0-689bda64bd98"/>
+					<textElement>
+						<font fontName="Calibri" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nama]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="403" y="5" width="152" height="20" uuid="0feed620-9e29-4481-8ee5-8f1fcca7865d"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pinjam_NoAnggota}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="403" y="25" width="152" height="20" uuid="ec0be82a-5ffe-4e45-b45b-d99e3ad68690"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{anggota_Nama}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="42" forecolor="#FFFFFF" backcolor="#000000" uuid="9a3bef7d-0ee5-4fa8-93cf-25b13eba9171"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[   LAPORAN PEMINJAMAN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="59" splitType="Stretch">
+			<rectangle>
+				<reportElement x="26" y="7" width="419" height="42" uuid="ac7b2338-b822-4eb5-b4b9-bfe7312b2648"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="26" y="7" width="100" height="22" backcolor="#CCCCCC" uuid="87db1539-c249-411d-bccf-ec3d6b41b9bd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="36" y="7" width="69" height="20" uuid="2d9bc939-dbf3-4fbb-91c0-bd3d9bc5d697"/>
+				<textElement>
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kode Buku]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="126" y="7" width="246" height="22" backcolor="#CCCCCC" uuid="cd73b814-db1c-4249-ab30-89af8b11e2cf"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="139" y="7" width="69" height="20" backcolor="#CCCCCC" uuid="1482ccd9-4cab-404e-bf55-203956cfce0b"/>
+				<textElement>
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Judul]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="372" y="7" width="73" height="22" backcolor="#CCCCCC" uuid="c240edc4-4cef-4124-8cdc-7aa09d6de1b9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="391" y="7" width="63" height="20" uuid="736d40ef-5ca5-4ed5-b627-08d2a6683908"/>
+				<textElement>
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="403" y="29" width="15" height="20" uuid="21574a83-547a-46a9-9930-116e3b2f6308"/>
+				<textElement>
+					<font fontName="Calibri" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detailpinjam_Status}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="26" y="29" width="100" height="20" uuid="6dd0cbdf-337a-4f91-980e-adb22ad65514"/>
+			</rectangle>
+			<textField>
+				<reportElement x="36" y="29" width="100" height="20" uuid="a7408e14-c9e7-44d2-b09d-26ab91b15f5d"/>
+				<textElement>
+					<font fontName="Calibri" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detailpinjam_KodeBuku}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="126" y="29" width="246" height="20" uuid="9601fa00-45fe-41c6-8366-7192eb11d9f4"/>
+			</rectangle>
+			<textField>
+				<reportElement x="139" y="29" width="199" height="20" uuid="b4f2e901-40e0-4ab3-94cc-65590266a7cd"/>
+				<textElement>
+					<font fontName="Calibri" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{buku_Judul}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="452" y="29" width="110" height="20" uuid="0478bf58-6be6-4245-9be0-046a6363198b"/>
+				<textElement>
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detailpinjam_Status}.equals ("0") ? "Belum Kembali" : "Sudah Kembali"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="7" width="21" height="20" uuid="3c4e2900-38ae-49b6-a64f-30b018119638"/>
+				<textElement>
+					<font fontName="Calibri" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="7" y="29" width="13" height="20" uuid="bbf3c241-40a0-42aa-80a8-bf3656f43c9d"/>
+				<textElement>
+					<font fontName="Calibri" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pinjam_NoPinjam_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="36" splitType="Stretch">
+			<textField pattern="HH.mm">
+				<reportElement x="191" y="16" width="115" height="20" uuid="05125019-7a4c-4595-99e2-c3d7963f39d4"/>
+				<textElement>
+					<font fontName="Calibri" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="175" y="16" width="12" height="20" uuid="91080aaf-847e-4db7-82a7-e9f689e2f077"/>
+				<textElement>
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[|]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="16" y="16" width="182" height="20" uuid="3bc0012c-d499-43b5-8b8f-6c4fbb9a6f91"/>
+				<textElement>
+					<font fontName="Calibri" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="435" y="16" width="80" height="20" uuid="becab5cd-48e8-4b2a-a734-b845c0382b66"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="16" width="40" height="20" uuid="7f14e622-2770-4620-a61a-3d22a21d5166"/>
+				<textElement>
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
